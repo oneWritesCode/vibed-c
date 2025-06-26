@@ -1,0 +1,380 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .perspective-1500 {
+    perspective: 1500px;
+  }
+  
+  .card-3d-container {
+    width: 380px;
+    height: auto;
+    min-height: 580px;
+    transition: none;
+    transform-style: preserve-3d;
+    position: relative;
+    user-select: none;
+  }
+  
+  /* Real 3D Card Layers */
+  .card-back-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      #ffffff 0%, 
+      #f8f9fa 25%, 
+      #ffffff 50%, 
+      #fafafa 75%, 
+      #ffffff 100%
+    );
+    border: 4px solid #ff4500;
+    border-radius: 24px;
+    transform: translateZ(-20px);
+    box-shadow: 
+      0 0 0 2px rgba(255, 69, 0, 0.4),
+      0 0 0 4px rgba(255, 69, 0, 0.2),
+      0 40px 80px -20px rgba(0, 0, 0, 0.6);
+  }
+  
+  .card-middle-layer {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: linear-gradient(135deg, 
+      #ffffff 0%, 
+      #fefefe 25%, 
+      #ffffff 50%, 
+      #f9f9f9 75%, 
+      #ffffff 100%
+    );
+    border: 2px solid rgba(255, 69, 0, 0.5);
+    border-radius: 22px;
+    transform: translateZ(-10px);
+    box-shadow: 
+      inset 0 3px 6px rgba(255, 69, 0, 0.15),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.08),
+      0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  }
+  
+  .card-surface {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      #ffffff 0%, 
+      #fefefe 15%, 
+      #ffffff 30%, 
+      #fafafa 45%, 
+      #ffffff 60%, 
+      #f8f9fa 75%, 
+      #ffffff 90%, 
+      #fefefe 100%
+    );
+    border: 3px solid #ff4500;
+    border-radius: 24px;
+    transform: translateZ(0px);
+    box-shadow: 
+      0 30px 60px -15px rgba(0, 0, 0, 0.4),
+      0 20px 40px -10px rgba(255, 69, 0, 0.3),
+      0 10px 20px -5px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 69, 0, 0.2),
+      inset 0 4px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -4px 0 rgba(255, 69, 0, 0.15),
+      inset 4px 0 0 rgba(255, 255, 255, 0.4),
+      inset -4px 0 0 rgba(255, 69, 0, 0.08);
+    overflow: hidden;
+  }
+  
+  /* Shiny Reflection Overlay */
+  .card-shine-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.6) 15%,
+      rgba(255, 255, 255, 0.3) 30%,
+      transparent 45%,
+      transparent 55%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0.3) 85%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+    border-radius: 21px;
+    pointer-events: none;
+    z-index: 10;
+    animation: card-shine 4s ease-in-out infinite;
+  }
+  
+  /* 3D Badge Clip */
+  .card-clip {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%) translateZ(15px);
+    width: 50px;
+    height: 40px;
+    background: linear-gradient(135deg, 
+      #ff4500 0%, 
+      #ff6500 25%, 
+      #ff4500 50%, 
+      #ff3300 75%, 
+      #ff4500 100%
+    );
+    border-radius: 12px 12px 6px 6px;
+    box-shadow: 
+      0 12px 24px rgba(0, 0, 0, 0.4),
+      0 6px 12px rgba(255, 69, 0, 0.5),
+      inset 0 4px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -4px 0 rgba(0, 0, 0, 0.3),
+      inset 4px 0 0 rgba(255, 255, 255, 0.3),
+      inset -4px 0 0 rgba(0, 0, 0, 0.15);
+    z-index: 30;
+  }
+
+  .clip-hole {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 50%;
+    box-shadow: 
+      inset 0 4px 8px rgba(0, 0, 0, 1),
+      0 1px 2px rgba(255, 255, 255, 0.4);
+  }
+
+  /* 3D Profile Container */
+  .profile-container-3d {
+    position: relative;
+    transform: translateZ(8px);
+    border-radius: 50%;
+    box-shadow: 
+      0 15px 30px rgba(255, 69, 0, 0.4),
+      0 8px 16px rgba(0, 0, 0, 0.3),
+      0 0 0 4px rgba(255, 255, 255, 0.8),
+      0 0 0 7px rgba(255, 69, 0, 0.6);
+  }
+
+  /* 3D Job Details */
+  .detail-row-3d {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 2px solid rgba(255, 69, 0, 0.25);
+    min-height: 28px;
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.9) 0%, 
+      rgba(248, 249, 250, 0.8) 50%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+    border-radius: 6px;
+    margin-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 
+      0 4px 8px rgba(255, 69, 0, 0.15),
+      0 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2px 0 rgba(255, 69, 0, 0.1);
+    transform: translateZ(2px);
+  }
+
+  .detail-row-3d:last-child {
+    border-bottom: none;
+  }
+
+  .detail-label-3d {
+    font-size: 12px;
+    font-weight: 700;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    min-width: 80px;
+    flex-shrink: 0;
+  }
+
+  .detail-value-3d {
+    font-size: 13px;
+    color: #333;
+    font-weight: 600;
+    text-align: right;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* 3D Button */
+  .button-3d {
+    background: linear-gradient(135deg, 
+      #ff4500 0%, 
+      #ff6500 25%, 
+      #ff4500 50%, 
+      #ff3300 75%, 
+      #ff4500 100%
+    );
+    border: 3px solid #cc3700;
+    box-shadow: 
+      0 15px 30px rgba(255, 69, 0, 0.5),
+      0 8px 16px rgba(0, 0, 0, 0.3),
+      inset 0 4px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -4px 0 rgba(0, 0, 0, 0.3),
+      inset 4px 0 0 rgba(255, 255, 255, 0.2),
+      inset -4px 0 0 rgba(0, 0, 0, 0.1);
+    transform: translateZ(8px);
+    transition: transform 0.1s ease;
+  }
+
+  .button-3d:active {
+    transform: translateZ(4px);
+    box-shadow: 
+      0 8px 16px rgba(255, 69, 0, 0.5),
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      inset 0 3px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -3px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /* 3D QR Section */
+  .qr-section-3d {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: linear-gradient(135deg, 
+      #ffffff 0%, 
+      #f8f9fa 25%, 
+      #ffffff 50%, 
+      #fafafa 75%, 
+      #ffffff 100%
+    );
+    border: 3px solid #ff4500;
+    border-radius: 16px;
+    margin-top: auto;
+    box-shadow: 
+      0 12px 24px rgba(255, 69, 0, 0.3),
+      0 6px 12px rgba(0, 0, 0, 0.2),
+      inset 0 3px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -3px 0 rgba(255, 69, 0, 0.15),
+      inset 3px 0 0 rgba(255, 255, 255, 0.4),
+      inset -3px 0 0 rgba(255, 69, 0, 0.08);
+    transform: translateZ(3px);
+  }
+
+  .qr-code-3d {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, 
+      #ffffff 0%, 
+      #f8f9fa 50%, 
+      #ffffff 100%
+    );
+    border: 3px solid #ff4500;
+    border-radius: 12px;
+    flex-shrink: 0;
+    box-shadow: 
+      0 6px 12px rgba(255, 69, 0, 0.3),
+      inset 0 2px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2px 0 rgba(255, 69, 0, 0.15);
+    transform: translateZ(2px);
+  }
+
+  .qr-info-3d {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .employee-id-3d {
+    font-size: 11px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+  }
+
+  .scan-text-3d {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+  }
+}
+
+/* Shiny Animation */
+@keyframes card-shine {
+  0% {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.6) 15%,
+      rgba(255, 255, 255, 0.3) 30%,
+      transparent 45%,
+      transparent 55%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0.3) 85%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+  }
+  50% {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.9) 15%,
+      rgba(255, 255, 255, 0.7) 30%,
+      rgba(255, 255, 255, 0.2) 45%,
+      rgba(255, 255, 255, 0.2) 55%,
+      rgba(255, 255, 255, 0.4) 70%,
+      rgba(255, 255, 255, 0.7) 85%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+  }
+  100% {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.6) 15%,
+      rgba(255, 255, 255, 0.3) 30%,
+      transparent 45%,
+      transparent 55%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0.3) 85%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+  }
+}
+
+/* Remove all transitions except for editing elements */
+.group\/edit {
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Remove default input styles */
+input, textarea {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+/* Border utilities */
+.border-3 {
+  border-width: 3px;
+}
